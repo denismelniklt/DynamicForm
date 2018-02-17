@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicFormWeb", "DynamicFo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{10382C59-2D40-41EC-ABEF-830E1E9AD9B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{217FD860-28EC-4294-94BE-08E803B70885}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{2FB9E02E-79E5-49FA-A396-5819423FD854}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{10382C59-2D40-41EC-ABEF-830E1E9AD9B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10382C59-2D40-41EC-ABEF-830E1E9AD9B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10382C59-2D40-41EC-ABEF-830E1E9AD9B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{217FD860-28EC-4294-94BE-08E803B70885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{217FD860-28EC-4294-94BE-08E803B70885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{217FD860-28EC-4294-94BE-08E803B70885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{217FD860-28EC-4294-94BE-08E803B70885}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FB9E02E-79E5-49FA-A396-5819423FD854}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FB9E02E-79E5-49FA-A396-5819423FD854}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FB9E02E-79E5-49FA-A396-5819423FD854}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FB9E02E-79E5-49FA-A396-5819423FD854}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

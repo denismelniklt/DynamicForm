@@ -1,37 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using BLL;
+using DynamicFormWeb.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using DynamicFormWeb.Models;
+using System.Threading.Tasks;
 
 namespace DynamicFormWeb.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IDynamicFormService dynamicFormService;
+
+        public HomeController(IDynamicFormService dynamicFormService)
         {
-            return View();
+            this.dynamicFormService = dynamicFormService;
         }
 
-        public IActionResult About()
+        public async Task<IActionResult> Index()
         {
-            ViewData["Message"] = "Your application description page.";
+            var topmostForm = await dynamicFormService.GetTopmostForm();
 
-            return View();
-        }
+            FormViewModel formViewModel;
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
+            if (topmostForm == null)
+            {
+                formViewModel = new FormViewModel();
+            }
+            else
+            {
+                formViewModel = Mapper.Map<FormViewModel>(topmostForm);
+            }
 
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(formViewModel);
         }
     }
 }

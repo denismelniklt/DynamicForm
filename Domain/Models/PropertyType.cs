@@ -1,4 +1,6 @@
-﻿namespace Domain.Models
+﻿using System.Runtime.Serialization;
+
+namespace Domain.Models
 {
     public class PropertyType : Base
     {

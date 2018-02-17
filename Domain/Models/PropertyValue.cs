@@ -1,7 +1,9 @@
-﻿namespace Domain.Models
+﻿using System.Runtime.Serialization;
+
+namespace Domain.Models
 {
     public class PropertyValue : Base
     {
-        public string Value { get; set; }
+        public string Name { get; set; }
     }
 }
