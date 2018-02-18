@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BLL;
+using Domain.Models;
 using DynamicFormWeb.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -32,5 +33,15 @@ namespace DynamicFormWeb.Controllers
 
             return View(formViewModel);
         }
+
+        [HttpPost]
+        [Route("update")]
+        public async Task<IActionResult> Update(Form form)
+        {
+            await dynamicFormService.UpdateForm(form);
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

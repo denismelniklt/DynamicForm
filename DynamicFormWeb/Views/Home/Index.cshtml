@@ -1,9 +1,63 @@
 ﻿@model FormViewModel
 
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+} 
+
+<style>
+    .inactive  {
+        
+    }
+</style>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#btnEditProperties").click(
+            function () {
+                $('#btnEditProperties').prop("disabled", true);
+                $('#btnSaveChanges').prop("disabled", false);
+                $('#btnDiscardChanges').prop("disabled", false);
+            })
+
+        $("#btnSaveChanges").click(
+            function () {
+                var properties = 
+
+                $.ajax({
+                    type: "POST",
+                    url: "Update",
+                    data: {
+                        id: $('#formId').text(),
+                        name: "Denis"
+                    },
+                    success: function () {
+                        alert("Forma sėkmingai išsaugota");
+                        $('#btnEditProperties').prop("disabled", false);
+                        $('#btnSaveChanges').prop("disabled", true);
+                        $('#btnDiscardChanges').prop("disabled", true);
+                    },
+                    error: function () {
+                        alert("Įvyko klaida");
+                    }
+                });
+            })
+
+        $("#btnDiscardChanges").click(
+            function () {
+                $('#btnEditProperties').prop("disabled", false);
+                $('#btnSaveChanges').prop("disabled", true);
+                $('#btnDiscardChanges').prop("disabled", true);
+            })
+    });
+
+</script>
+
 <div>
     <table>
         <tr>
             <td colspan="2">
+                <span id="formId" style="visibility: hidden">@Model.Id</span>
                 @Model.Name
             </td>
         </tr>
@@ -23,14 +77,39 @@
                         @property.Name
                     </td>
                     <td>
-                        @Html.DropDownList(
-                            "Values",
-                            new SelectList(property.Values.Select(v => v.Name))
-                        )
-                    )
+                        @{ 
+                            var currentIdOfTheProperty = property.CurrentValue.Id;
+                            var currentValueOfTheProperty = property.CurrentValue.Name;
+                        }
+                        @switch (property.Type.Id)
+                        {
+                            case 1:
+                                {
+                                    @Html.DropDownList("Values",
+                                        new SelectList(property.Values.Select(v => v.Name), currentValueOfTheProperty),
+                                        new { id =  currentIdOfTheProperty }
+                                    )
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    @Html.TextBox("Text", currentValueOfTheProperty, new { id = currentIdOfTheProperty });
+                                    break;
+                                }
+                        }
                     </td>
                 </tr>
             }
+
+        <tr>
+            <td colspan="2">
+                <div>
+                    <input type="button" id="btnEditProperties" value="Koreguoti požymius" />
+                    <input type="button" id="btnSaveChanges" disabled="disabled" value="Saugoti pataisymus" />
+                    <input type="button" id="btnDiscardChanges" disabled="disabled" value="Atšaukti pataisymus" />                    
+                </div>
+            </td>
+        </tr>
                 
     </table>
 </div>

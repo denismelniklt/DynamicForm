@@ -7,6 +7,7 @@ namespace Domain.Models
     {
         public string Name { get; set; }
         public PropertyType Type { get; set; }
+        public PropertyValue CurrentValue { get; set; }
         public List<PropertyValue> Values { get; set; }
 
         public Property()
