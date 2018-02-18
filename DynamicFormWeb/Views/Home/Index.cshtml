@@ -4,72 +4,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 } 
 
-<style>
-    .inactive  {
-        
-    }
-</style>
+<form action="update">
+    <div>
+        <table>
+            <tr>
+                <td colspan="2">
+                    @Model.Name
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Registracijos požymiai
+                </td>
+                <td>
+                    Reikšmė
+                </td>
+            </tr>
 
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        $("#btnEditProperties").click(
-            function () {
-                $('#btnEditProperties').prop("disabled", true);
-                $('#btnSaveChanges').prop("disabled", false);
-                $('#btnDiscardChanges').prop("disabled", false);
-            })
-
-        $("#btnSaveChanges").click(
-            function () {
-                var properties = 
-
-                $.ajax({
-                    type: "POST",
-                    url: "Update",
-                    data: {
-                        id: $('#formId').text(),
-                        name: "Denis"
-                    },
-                    success: function () {
-                        alert("Forma sėkmingai išsaugota");
-                        $('#btnEditProperties').prop("disabled", false);
-                        $('#btnSaveChanges').prop("disabled", true);
-                        $('#btnDiscardChanges').prop("disabled", true);
-                    },
-                    error: function () {
-                        alert("Įvyko klaida");
-                    }
-                });
-            })
-
-        $("#btnDiscardChanges").click(
-            function () {
-                $('#btnEditProperties').prop("disabled", false);
-                $('#btnSaveChanges').prop("disabled", true);
-                $('#btnDiscardChanges').prop("disabled", true);
-            })
-    });
-
-</script>
-
-<div>
-    <table>
-        <tr>
-            <td colspan="2">
-                <span id="formId" style="visibility: hidden">@Model.Id</span>
-                @Model.Name
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Registracijos požymiai
-            </td>
-            <td>
-                Reikšmė
-            </td>
-        </tr>
-       
             @foreach (var property in Model.Properties)
             {
                 <tr>
@@ -77,7 +28,7 @@
                         @property.Name
                     </td>
                     <td>
-                        @{ 
+                        @{
                             var currentIdOfTheProperty = property.CurrentValue.Id;
                             var currentValueOfTheProperty = property.CurrentValue.Name;
                         }
@@ -87,7 +38,7 @@
                                 {
                                     @Html.DropDownList("Values",
                                         new SelectList(property.Values.Select(v => v.Name), currentValueOfTheProperty),
-                                        new { id =  currentIdOfTheProperty }
+                                        new { id = currentIdOfTheProperty }
                                     )
                                     break;
                                 }
@@ -99,17 +50,20 @@
                         }
                     </td>
                 </tr>
-            }
+             }
 
-        <tr>
-            <td colspan="2">
-                <div>
-                    <input type="button" id="btnEditProperties" value="Koreguoti požymius" />
-                    <input type="button" id="btnSaveChanges" disabled="disabled" value="Saugoti pataisymus" />
-                    <input type="button" id="btnDiscardChanges" disabled="disabled" value="Atšaukti pataisymus" />                    
-                </div>
-            </td>
-        </tr>
-                
-    </table>
-</div>
+            <tr>
+                <td colspan="2">
+                    <div>
+                        @*
+                            <input type="button" id="btnEditProperties" value="Koreguoti požymius" />
+                            <input type="submit" id="btnSaveChanges" disabled="disabled" value="Saugoti pataisymus" />
+                            <input type="button" id="btnDiscardChanges" disabled="disabled" value="Atšaukti pataisymus" />
+                        *@
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</form>
