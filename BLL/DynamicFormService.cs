@@ -10,7 +10,6 @@ namespace BLL
 {
     public class DynamicFormService : IDynamicFormService
     {
-        private const int TopmostDynamicFormTakeCount = 1;
         private IDynamicFormServiceDAL dynamicFormServiceDAL;
 
         public DynamicFormService(IDynamicFormServiceDAL dynamicFormServiceDAL)

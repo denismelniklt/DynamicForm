@@ -64,7 +64,7 @@ namespace DynamicFormWeb
 
                 routes.MapRoute(
                     name: "update",
-                    template: "{controller=Home}/{action=Update}");
+                    template: "{controller=Home}/{action=update}");
             });
 
             InitializeAutomapper();

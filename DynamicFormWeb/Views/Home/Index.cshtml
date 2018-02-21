@@ -4,12 +4,65 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 } 
 
-<form action="update">
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#btnEditProperties").click(
+            function () {
+                $('#btnEditProperties').prop("disabled", true);
+                $('#btnSaveChanges').prop("disabled", false);
+                $('#btnDiscardChanges').prop("disabled", false);
+            })
+
+        $("#btnSaveChanges").click(
+            function () {
+
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "Update",
+                    data: {
+                        id: $('#formId').text(),
+                        name: "Name",
+                        // get json for properties of the form
+                    },
+                    success: function () {
+                        alert("Forma sėkmingai išsaugota");
+
+                        $('#btnEditProperties').prop("disabled", false);
+                        $('#btnSaveChanges').prop("disabled", true);
+                        $('#btnDiscardChanges').prop("disabled", true);
+                    },
+                    error: function () {
+                        alert("Įvyko klaida");
+                    }
+                });
+            })
+
+        $("#btnDiscardChanges").click(
+            function () {
+                $('#btnEditProperties').prop("disabled", false);
+                $('#btnSaveChanges').prop("disabled", true);
+                $('#btnDiscardChanges').prop("disabled", true);
+            })
+    });
+
+</script>
+
+<style>
+    .hidden {
+        visibility: hidden;
+    }
+</style>
+
+<form>
     <div>
         <table>
             <tr>
                 <td colspan="2">
-                    @Model.Name
+                    <span id="formId" class="hidden">@Model.Id</span>
+                    <span id="formName">@Model.Name</span>
                 </td>
             </tr>
             <tr>
@@ -29,22 +82,23 @@
                     </td>
                     <td>
                         @{
-                            var currentIdOfTheProperty = property.CurrentValue.Id;
+                            var currentIdOfTheProperty = property.CurrentValue.Id.ToString();
                             var currentValueOfTheProperty = property.CurrentValue.Name;
                         }
                         @switch (property.Type.Id)
                         {
                             case 1:
                                 {
-                                    @Html.DropDownList("Values",
-                                        new SelectList(property.Values.Select(v => v.Name), currentValueOfTheProperty),
+                                    @Html.DropDownList("DropDownList",
+                                        new SelectList(property.Values.Select(v => v.Name),
+                                            currentValueOfTheProperty),
                                         new { id = currentIdOfTheProperty }
                                     )
                                     break;
                                 }
                             case 2:
                                 {
-                                    @Html.TextBox("Text", currentValueOfTheProperty, new { id = currentIdOfTheProperty });
+                                    @Html.TextBox("TextBox", currentValueOfTheProperty, new { id = currentIdOfTheProperty });
                                     break;
                                 }
                         }
@@ -55,11 +109,11 @@
             <tr>
                 <td colspan="2">
                     <div>
-                        @*
+                       
                             <input type="button" id="btnEditProperties" value="Koreguoti požymius" />
-                            <input type="submit" id="btnSaveChanges" disabled="disabled" value="Saugoti pataisymus" />
+                            <input type="button" id="btnSaveChanges" disabled="disabled" value="Saugoti pataisymus" />
                             <input type="button" id="btnDiscardChanges" disabled="disabled" value="Atšaukti pataisymus" />
-                        *@
+                        
                     </div>
                 </td>
             </tr>
